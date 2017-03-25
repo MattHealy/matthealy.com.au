@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 import os
-
-if os.path.exists('.env'):
-    print('Importing environment from .env...')
-    for line in open('.env'):
-        var = line.strip().split('=')
-        if len(var) == 2:
-            os.environ[var[0]] = var[1]
-
+import subprocess
+import sys
 
 from app import create_app
 from flask_script import Manager, Shell
@@ -22,16 +16,29 @@ pages = FlatPages(app)
 
 freezer = Freezer(app)
 
+
 def make_shell_context():
     return dict(app=app, pages=pages)
 
+
 manager.add_command("shell", Shell(make_context=make_shell_context))
+
 
 @manager.command
 def freeze():
     """Freeze the site to a set of static HTML files."""
     app.config['DEBUG'] = False
     freezer.freeze()
+
+
+@manager.command
+def lint():
+    """Runs the code linter"""
+    lint = subprocess.call(['flake8', '--ignore=E402']) == 0
+    if lint:
+        print('OK')
+    sys.exit(lint)
+
 
 if __name__ == '__main__':
     manager.run()

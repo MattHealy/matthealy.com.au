@@ -1,8 +1,4 @@
-app.db
-app-dev.db
-app-test.db
-.env
-test.db
+set-environment.sh
 *.log
 *.pot
 *.pyc

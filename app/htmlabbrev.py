@@ -1,7 +1,8 @@
 import re
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 whitespace = re.compile('(\w+)')
+
 
 class HTMLAbbrev(HTMLParser):
 
@@ -37,12 +38,8 @@ class HTMLAbbrev(HTMLParser):
             self.emit('</%s>' % tag)
             del self.stack[-1]
         else:
-            raise Exception('end tag %r does not match stack: %r' % (tag, self.stack))
-
-    #def handle_startendtag(self, tag, attrs):
-    #    self.stack.append(tag)
-    #    attrs = ' '.join('%s="%s"' % (k, v) for k, v in attrs)
-    #    self.emit('<%s%s/>' % (tag, (' ' + attrs).rstrip()))
+            raise Exception('end tag %r does not match stack: %r' %
+                            (tag, self.stack))
 
     def handle_data(self, data):
         for word in whitespace.split(data):

@@ -4,16 +4,19 @@ from .. import pages
 from .. import htmltruncate
 from werkzeug.contrib.atom import AtomFeed
 
+
 @blog.context_processor
 def inject_debug():
-    return dict(debug = current_app.config['DEBUG'])
+    return dict(debug=current_app.config['DEBUG'])
+
 
 @blog.route('/', methods=['GET'])
 def index():
 
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
-    return render_template("blog/index.html",title='Blog',posts=latest[:5])
+    return render_template("blog/index.html", title='Blog', posts=latest[:5])
+
 
 @blog.route('/post/list/', methods=['GET'])
 def archives():
@@ -21,7 +24,8 @@ def archives():
     posts = (p for p in pages)
     posts = sorted(posts, reverse=True, key=lambda p: p.meta['timestamp'])
 
-    return render_template("blog/archives.html",title='Posts',posts=posts)
+    return render_template("blog/archives.html", title='Posts', posts=posts)
+
 
 @blog.route('/post/tagged/<tag>/', methods=['GET'])
 def view_tagged_posts(tag):
@@ -33,7 +37,8 @@ def view_tagged_posts(tag):
     if not posts:
         abort(404)
 
-    return render_template("blog/post.html",posts=posts,title=tag)
+    return render_template("blog/post.html", posts=posts, title=tag)
+
 
 @blog.route('/post/<slug>/', methods=['GET'])
 def view_post(slug):
@@ -43,27 +48,25 @@ def view_post(slug):
     if not post:
         abort(404)
 
-    return render_template("blog/post.html",posts=[post],title=post.meta['title'])
+    return render_template("blog/post.html", posts=[post],
+                           title=post.meta['title'])
+
 
 @blog.route('/recent.atom')
 def recent_feed():
 
     feed = AtomFeed('Matt Healy Web Solutions - Recent Articles',
-                    feed_url='https://www.matthealy.com.au/blog/recent.atom', url='https://www.matthealy.com.au')
+                    feed_url='https://www.matthealy.com.au/blog/recent.atom',
+                    url='https://www.matthealy.com.au')
 
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
     for post in latest[:15]:
+        html = '{}<a href="https://www.matthealy.com.au/blog/post/{}/">Read More</a>'.format(htmltruncate(post.html, 900), post.meta['slug'])
 
-        html = htmltruncate(post.html,900) + \
-               '<a href="' + \
-               'https://www.matthealy.com.au/blog/post/' + post.meta['slug'] + '/' + \
-               '">Read More</a>'
-
-        feed.add(post.meta['title'], unicode(html),
-                 content_type='html',
+        feed.add(post.meta['title'], str(html), content_type='html',
                  author=post.meta['author'],
-                 url='https://www.matthealy.com.au/blog/post/'+post.meta['slug']+'/',
-                 updated=post.meta['timestamp'])
+                 url='https://www.matthealy.com.au/blog/post/' +
+                 post.meta['slug'] + '/', updated=post.meta['timestamp'])
 
     return feed.get_response()

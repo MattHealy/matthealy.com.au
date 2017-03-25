@@ -1,2 +1,0 @@
-FLASK_CONFIG=production
-SECRET_KEY=1234
