@@ -62,7 +62,9 @@ def recent_feed():
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
     for post in latest[:15]:
-        html = '{}<a href="https://www.matthealy.com.au/blog/post/{}/">Read More</a>'.format(htmltruncate(post.html, 900), post.meta['slug'])
+        html = '{}'.format(htmltruncate(post.html, 900)) + \
+               '<a href="https://www.matthealy.com.au/blog/post/' + \
+               '{}/">Read More</a>'.format(post.meta['slug'])
 
         feed.add(post.meta['title'], str(html), content_type='html',
                  author=post.meta['author'],
