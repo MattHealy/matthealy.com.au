@@ -31,19 +31,9 @@ def about():
     return render_template("about.html")
 
 
-@main.route('/portfolio/', methods=['GET'])
-def portfolio():
-    return render_template("portfolio.html")
-
-
 @main.route('/contact/', methods=['GET'])
 def contact():
     return render_template("contact.html")
-
-
-@main.route('/services/', methods=['GET'])
-def services():
-    return render_template("services.html")
 
 
 @main.route('/terms/', methods=['GET'])
@@ -64,12 +54,6 @@ def sitemapxml():
   </url>
   <url>
     <loc>https://www.matthealy.com.au/contact/</loc>
-  </url>
-  <url>
-    <loc>https://www.matthealy.com.au/portfolio/</loc>
-  </url>
-  <url>
-    <loc>https://www.matthealy.com.au/services/</loc>
   </url>
   <url>
     <loc>https://www.matthealy.com.au/terms/</loc>

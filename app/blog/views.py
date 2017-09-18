@@ -55,7 +55,7 @@ def view_post(slug):
 @blog.route('/recent.atom')
 def recent_feed():
 
-    feed = AtomFeed('Matt Healy Web Solutions - Recent Articles',
+    feed = AtomFeed('Matt Healy - Recent Articles',
                     feed_url='https://www.matthealy.com.au/blog/recent.atom',
                     url='https://www.matthealy.com.au')
 

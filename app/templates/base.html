@@ -7,16 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Matt Healy Web Solutions - Web Developer - Perth, Western Australia">
+    <meta name="description" content="Matt Healy - Web Developer - Perth, Western Australia">
     <meta name="author" content="Matt Healy">
 
     {% if title %}
-    <title>{{ title }} - Matt Healy Web Solutions - Web Developer - Perth, Western Australia</title>
+    <title>{{ title }} - Matt Healy - Web Developer - Perth, Western Australia</title>
     {% else %}
-    <title>Matt Healy Web Solutions - Web Developer - Perth, Western Australia</title>
+    <title>Matt Healy - Web Developer - Perth, Western Australia</title>
     {% endif %}
 
-    <link href="https://www.matthealy.com.au/blog/recent.atom" rel="alternate" title="Matt Healy Web Solutions - Recent Changes" type="application/atom+xml">
+    <link href="https://www.matthealy.com.au/blog/recent.atom" rel="alternate" title="Matt Healy - Recent Changes" type="application/atom+xml">
 
     <link rel="canonical" href="https://www.matthealy.com.au{{ request.path }}">
 
@@ -42,8 +42,8 @@
 
 <body>
 
-    <div class="brand">Matt Healy Web Solutions</div>
-    <div class="address-bar">Perth, Western Australia | 0403 429 865</div>
+    <div class="brand">Matt Healy - Web Developer</div>
+    <div class="address-bar">Perth, Western Australia</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -64,12 +64,6 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="{{ url_for('main.index') }}">Home</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('main.services') }}">Services</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('main.portfolio') }}">Portfolio</a>
                     </li>
                     <li>
                         <a href="{{ url_for('main.about') }}">About</a>
