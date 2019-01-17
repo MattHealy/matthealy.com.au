@@ -16,7 +16,7 @@ def index():
     frameworks = ['Flask', 'jQuery', 'Wordpress', 'Twitter Bootstrap']
 
     software = ['MySQL', 'Linux', 'Apache', 'Nginx', 'Git', 'Sendmail',
-                'Swagger', 'Xero']
+                'Swagger', 'Xero', 'Docker']
 
     other = ['Amazon Web Services', 'Google Apps', 'Github', 'JSON', 'REST',
              'SOAP', 'XML', 'DNS', 'SMTP', 'Domain Names']
