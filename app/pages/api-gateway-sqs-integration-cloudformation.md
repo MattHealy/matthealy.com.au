@@ -23,6 +23,7 @@ After a bit of trial and error, I managed to come up with the below Cloudformati
 3. Creates an IAM Role with permissions to allow API Gateway to send messages to SQS
 4. Creates a REST API endpoint with POST method, configured with the SQS integration
 
+Please feel free to use the below template or modify it to suit your own needs.
 <hr />
 
 <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=apigatewaysqs&templateURL=https://cf-templates-1ljknwz295obo-ap-southeast-2.s3.amazonaws.com/api-gateway-sqs-integration-20190526.yaml">
