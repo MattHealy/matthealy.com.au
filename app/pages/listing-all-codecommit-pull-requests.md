@@ -29,8 +29,6 @@ Using the excellent <a href="https://boto3.amazonaws.com/v1/documentation/api/la
     client = boto3.client('codecommit')
     region = client.meta.region_name
 
-    client = boto3.client('codecommit')
-
     pullRequests = []
 
     resp = client.list_repositories()
