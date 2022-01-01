@@ -1,8 +1,8 @@
-from flask import render_template, current_app, abort
+from flask import render_template, current_app, abort, Response
 from . import blog
 from .. import pages
 from .. import htmltruncate
-from werkzeug.contrib.atom import AtomFeed
+import feedgenerator
 
 
 @blog.context_processor
@@ -55,20 +55,31 @@ def view_post(slug):
 @blog.route('/recent.atom')
 def recent_feed():
 
-    feed = AtomFeed('Matt Healy - Recent Articles',
-                    feed_url='https://www.matthealy.com.au/blog/recent.atom',
-                    url='https://www.matthealy.com.au')
+    # Atom1Feed
+    feed = feedgenerator.Atom1Feed(
+        title='Matt Healy - Recent Articles',
+        link='https://www.matthealy.com.au/blog/recent.atom',
+        description='Recent blog posts by Matt Healy',
+        language="en",
+    )
 
     latest = sorted(pages, reverse=True, key=lambda p: p.meta['timestamp'])
 
     for post in latest[:15]:
-        html = '{}'.format(htmltruncate(post.html, 900)) + \
-               '<a href="https://www.matthealy.com.au/blog/post/' + \
-               '{}/">Read More</a>'.format(post.meta['slug'])
 
-        feed.add(post.meta['title'], str(html), content_type='html',
-                 author=post.meta['author'],
-                 url='https://www.matthealy.com.au/blog/post/' +
-                 post.meta['slug'] + '/', updated=post.meta['timestamp'])
+        link = 'https://www.matthealy.com.au/blog/post/{}/' \
+            .format(post.meta['slug'])
 
-    return feed.get_response()
+        description = '{}'.format(htmltruncate(post.html, 900)) + \
+            '<a href="https://www.matthealy.com.au/blog/post/' + \
+            '{}/">Read More</a>'.format(post.meta['slug'])
+
+        feed.add_item(
+            title=post.meta['title'],
+            link=link,
+            description=description,
+            author_name=post.meta['author'],
+            pubdate=post.meta['timestamp'],
+        )
+
+    return Response(feed.writeString('utf-8'), mimetype='application/atom+xml')

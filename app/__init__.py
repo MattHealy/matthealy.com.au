@@ -4,7 +4,7 @@ from flask_moment import Moment
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import config, basedir
 
