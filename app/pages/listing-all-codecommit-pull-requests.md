@@ -6,9 +6,9 @@ author: Matt Healy
 
 <a href="https://aws.amazon.com/codecommit/">AWS CodeCommit</a> is Amazon Web Service's Git hosting service and part of their suite of developer tools. It can be thought of as a comparable service to something like <a href="https://github.com/">GitHub</a> or <a href="https://about.gitlab.com/">GitLab</a> although being completely honest both of those services are ahead of CodeCommit in terms of usability and feature set. It does however have the advantage of being closely tied to other AWS services, in particular IAM for permission management.
 
-CodeCommit allows for the usual development workflow of Pull Requests. However, something annoying about this is that you can only view outstanding pull requests against a sigle repository. There is no way in the AWS Console to have an overview of all outstanding pull requests across all code repositories in your account (within the current region).
+CodeCommit allows for the usual development workflow of Pull Requests. However, something annoying about this is that you can only view outstanding pull requests against a single repository. There is no way in the AWS Console to have an overview of all outstanding pull requests across all code repositories in your account (within the current region).
 
-As someone who is responsible for performing code reviews, I found this quite frustrating in that I couldn't at a glace see how many PR's are waiting for my review and thus started to fall behind in making those reviews. As you may know from my earlier blog entries, one thing I love about AWS is that almost anything can be scripted using their API or CLI interfaces.
+As someone who is responsible for performing code reviews, I found this quite frustrating in that I couldn't at a glance see how many PR's are waiting for my review and thus started to fall behind in making those reviews. As you may know from my earlier blog entries, one thing I love about AWS is that almost anything can be scripted using their API or CLI interfaces.
 
 Using the excellent <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">Boto3</a> Python library, I managed to create the below script which I find useful for summarising all outstanding pull requests in the account.
 
