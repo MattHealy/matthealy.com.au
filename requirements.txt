@@ -3,7 +3,7 @@ blinker==1.9.0
 click==8.1.8
 feedgenerator==2.1.0
 flake8==7.1.1
-Flask==3.1.0
+Flask==3.1.1
 Flask-FlatPages==0.8.3
 Flask-Moment==1.0.6
 Frozen-Flask==1.0.2
